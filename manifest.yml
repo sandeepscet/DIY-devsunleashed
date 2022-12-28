@@ -1,0 +1,69 @@
+modules:
+  jira:globalPage:
+    - key: hello-world-global
+      resource: example-resource
+      resolver:
+        function: issue-panel-resolver
+      title: DIY
+      icon: logo.svg
+  jira:issuePanel:
+    - key: hello-world-panel
+      resource: example-resource
+      resolver:
+        function: issue-panel-resolver
+      title: DIY
+      icon: logo.svg
+  function:
+    - key: issue-panel-resolver
+      handler: indexResolver.handler
+    - key: main
+      handler: index.run
+  jira:adminPage:
+    - key: admin-page-example-hello-world-configure-page
+      resource: admin-resource
+      title: Configure App
+      resolver:
+        function: issue-panel-resolver
+      useAsConfig: true
+    - key: admin-page-example-hello-world-admin-page
+      function: main
+      title: Get started
+    - key: admin-page-example-hello-world-get-started-page
+      function: main
+      title: Get started
+      useAsGetStarted: true
+  confluence:contentAction:
+    - key: hello-confluence-panel
+      resource: example-resource
+      resolver:
+        function: issue-panel-resolver
+      title: DIY Confluence
+      icon: logo.svg
+resources:
+  - key: example-resource
+    path: static/app/public/
+    tunnel:
+      port: 9000    
+  - key: admin-resource
+    path: static/admin/public/
+    tunnel:
+      port: 3000    
+app:
+  id: ari:cloud:ecosystem::app/2f814a1d-b624-43ce-89a8-51d4c6677b01
+permissions:
+  scopes:
+    - storage:app
+    - read:jira-work
+    - search:confluence
+    - read:confluence-props
+    - read:content-details:confluence
+    - read:audit-log:confluence
+    - read:jira-user	
+  external:
+    styles:
+      - 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'
+    scripts:
+      - 'https://nosir.github.io/obelisk.js/dist/obelisk.min.1.0.2.js'
+  content:
+    styles:
+      - 'unsafe-inline'
