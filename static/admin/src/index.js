@@ -1,28 +1,49 @@
 import React from "react";
 
 import { render } from "react-dom";
-import { invoke } from '@forge/bridge';
+//import { invoke } from '@forge/bridge';
+
+async function invoke(method , {}){
+  return {
+
+  }
+}
 
 
 class App extends React.Component {
   state = {
-    rows: []
+    rows: [],
+    issue : ''
   };
   
   componentDidMount() {
     invoke('getStorage', { key: 'config' }).then((returnedData) => {
+        let  issue = ''  
         let initStat = [{
             type: "jql",
             ql: "issuetype = Story AND status = Done AND created >= -15d and assignee = currentUser() order by created DESC",
-            noOfBlocks : 1,
-            field : "created"  
+            category : "BLOCK",
+            multiple : 1
+          },
+          {
+            type: "jql",
+            ql: "issuetype = Story AND status = Done AND created >= -15d and assignee = currentUser() order by created DESC",
+            category : "BAR",
+            multiple : 1
+          },
+          {
+            type: "jql",
+            ql: "issuetype = Story AND status = Done AND created >= -15d and assignee = currentUser() order by created DESC",
+            category : "SPECIAL",
+            multiple : 1
           }];
 
         if(returnedData && Object.keys(returnedData).length > 0)
         {
-            initStat = returnedData;             
+            initStat = returnedData.rows;        
+            issue = returnedData.issue;
         }
-        this.setState({ rows: initStat });       
+        this.setState({ rows: initStat , issue });       
     });
   }
 
@@ -36,28 +57,20 @@ class App extends React.Component {
       rows
     });
   };
-  handleAddRow = () => {
-    const item = {
-      type: "jql",
-      ql: "",
-      noOfBlocks : 1,
-      field : ""  
-    };
+
+  handleIssueChange= issue => e => {
+    const {  value } = e.target;
     this.setState({
-      rows: [...this.state.rows, item]
+      issue : value
     });
   };
-
-  handleRemoveSpecificRow = (idx) => () => {
-    const rows = [...this.state.rows]
-    rows.splice(idx, 1)
-    this.setState({ rows })
-  }
+  
 
   onSubmitHandler = (e) => {
     e.preventDefault();
     document.getElementById("submit").innerHTML = "Saving";
-    invoke('setStorage', { key: 'config', value: this.state.rows }).then((returnedData) => {
+    console.log(this.state);
+    invoke('setStorage', { key: 'config', value: this.state }).then((returnedData) => {
       document.getElementById("submit").innerHTML = "Saved";
       setTimeout(() => document.getElementById("submit").innerHTML = "Save" , 2000);
     }); 
@@ -65,7 +78,7 @@ class App extends React.Component {
 
    render() {
 
-    if (this.state.rows.length === 0) {
+    if (Object.keys(this.state).length === 0) {
         return (<div><p>Loading...</p></div>)
     }
 
@@ -84,9 +97,8 @@ class App extends React.Component {
                     <th className="text-center"> # </th>
                     <th className="text-center"> Type </th>
                     <th className="text-center"> JQl/CQL </th>
-                    <th className="text-center"> No of Blocks </th>
-                    <th className="text-center"> Data Field </th>
-                    <th />
+                    <th className="text-center"> Block Category </th>
+                    <th className="text-center"> Multiple </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -113,43 +125,51 @@ class App extends React.Component {
                         />
                       </td>
                       <td>
-                        <input
-                          type="number"
-                          max="3"
-                          min="1"
-                          name="noOfBlocks"
-                          value={this.state.rows[idx].noOfBlocks}
+                      <select readOnly disabled name="type"
+                          value={this.state.rows[idx].category}
                           onChange={this.handleChange(idx)}
-                          className="form-control"
-                          required
-                        />
-                      </td>
+                          className="form-control" required>
+                        <option value="SPECIAL" >SPECIAL</option>
+                        <option value="BAR">BAR</option>
+                        <option value="BLOCK">BLOCK</option>
+                      </select> 
+                      </td> 
                       <td>
                         <input
                           type="text"
-                          name="field"
-                          value={this.state.rows[idx].field}
+                          name="multiple"
+                          value={this.state.rows[idx].multiple}
                           onChange={this.handleChange(idx)}
                           className="form-control"
                           required
                         />
-                      </td>
-                      <td>
-                        <button
-                          className="btn btn-outline-danger btn-sm"
-                          onClick={this.handleRemoveSpecificRow(idx)}
-                        >
-                          Remove
-                        </button>
-                      </td>
+                      </td>                     
                     </tr>
                   ))}
                 </tbody>
               </table>
-              <button onClick={this.handleAddRow} className="btn btn-primary">
-                Add Row
-              </button>
-              <button id="submit"
+
+              <div className="container">
+                <div className="row" >
+                  <div className="col-2">
+                  Issue Link :
+                  </div>
+                  <div className="col-2">
+                  <input
+                          type="text"
+                          name="issue"
+                          value={this.state.issue}
+                          onChange={this.handleIssueChange()}
+                          className="form-control"
+                        />     
+                  </div>
+                  <div  className="col-8"></div>
+
+                </div>
+                              
+
+               </div>      
+               <button id="submit"
                 onSubmit={this.onSubmitHandler}
                 type="submit"  className="btn btn-primary float-right">
                     Save
