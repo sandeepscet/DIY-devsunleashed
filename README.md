@@ -4,6 +4,13 @@
 - **Technical** :  Create a serverless game App that can use the maximum features of Forge
 - **Admin**: Build Creative Canvas Using productivity Data, User will get more tools to build something by themselves if they have more atlassian data.
 
+### Why
+- Employees will try to maximize productivity to get more tools/blocks. They will focus on all aspects like documentation, stories, bugs, etc as per their set workflow. Using those (hard-earned) blocks, they will try to create something amazing. so they need to be productive and creative both. 
+- Organizations/Teams can arrange competitions using this game.
+
+### How
+- Fetching Data from JIRA and Confluence using JQL/CQL. Since organizations have a different workflow, they can configure dynamic JQL/CQL on the admin screen and set the intial screen of the Game. 
+
 ## Features
 - Create Your Own World using Physics engine
 - Multiple Blocks/Tools in Canvas
@@ -14,8 +21,9 @@
 - Admin Configuration Page for JIRA and Confluence Data
 - Getting Started page for Admin
 
+
 ## Demo Video
-[Youtube](https://youtu.be/usEQRGRaISQ)
+- [Youtube](https://youtu.be/usEQRGRaISQ)
 
 ## Forge Features 
 - Modules (JIRA, Confluence, Admin)

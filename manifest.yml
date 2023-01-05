@@ -41,13 +41,9 @@ modules:
       icon: https://hallarayurveda.com/images/diylogo.svg
 resources:
   - key: example-resource
-    path: static/app/public/
-    tunnel:
-      port: 9000    
+    path: static/app/dist/
   - key: admin-resource
-    path: static/admin/public/
-    tunnel:
-      port: 3000    
+    path: static/admin/build/
 app:
   id: ari:cloud:ecosystem::app/2f814a1d-b624-43ce-89a8-51d4c6677b01
 permissions:
