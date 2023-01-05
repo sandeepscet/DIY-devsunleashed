@@ -1,14 +1,15 @@
 import React from "react";
 
 import { render } from "react-dom";
-//import { invoke } from '@forge/bridge';
+import { invoke } from '@forge/bridge';
 
+/*
 async function invoke(method , {}){
   return {
 
   }
 }
-
+*/
 
 class App extends React.Component {
   state = {
@@ -17,19 +18,19 @@ class App extends React.Component {
   };
   
   componentDidMount() {
-    invoke('getStorage', { key: 'config' }).then((returnedData) => {
+    invoke('getStorage', { key: 'diyconfig' }).then((returnedData) => {
         let  issue = ''  
-        let initStat = [{
+        let rows = [{
             type: "jql",
             ql: "issuetype = Story AND status = Done AND created >= -15d and assignee = currentUser() order by created DESC",
             category : "BLOCK",
-            multiple : 1
+            multiple : 2
           },
           {
             type: "jql",
             ql: "issuetype = Story AND status = Done AND created >= -15d and assignee = currentUser() order by created DESC",
             category : "BAR",
-            multiple : 1
+            multiple : 2
           },
           {
             type: "jql",
@@ -38,12 +39,14 @@ class App extends React.Component {
             multiple : 1
           }];
 
-        if(returnedData && Object.keys(returnedData).length > 0)
+          let initStat = returnedData;
+        if(!returnedData ||  Object.keys(returnedData).length === 0)
         {
-            initStat = returnedData.rows;        
-            issue = returnedData.issue;
+            rows = rows;        
+            issue = issue;
+            initStat = { rows: rows , issue };
         }
-        this.setState({ rows: initStat , issue });       
+        this.setState(initStat);       
     });
   }
 
@@ -70,7 +73,7 @@ class App extends React.Component {
     e.preventDefault();
     document.getElementById("submit").innerHTML = "Saving";
     console.log(this.state);
-    invoke('setStorage', { key: 'config', value: this.state }).then((returnedData) => {
+    invoke('setStorage', { key: 'diyconfig', value: this.state }).then((returnedData) => {
       document.getElementById("submit").innerHTML = "Saved";
       setTimeout(() => document.getElementById("submit").innerHTML = "Save" , 2000);
     }); 
@@ -78,7 +81,7 @@ class App extends React.Component {
 
    render() {
 
-    if (Object.keys(this.state).length === 0) {
+    if (Object.keys(this.state.rows).length === 0) {
         return (<div><p>Loading...</p></div>)
     }
 
@@ -149,10 +152,10 @@ class App extends React.Component {
                 </tbody>
               </table>
 
-              <div className="container">
+              <div className="container d-none">
                 <div className="row" >
                   <div className="col-2">
-                  Issue Link :
+                  Issue Link : 
                   </div>
                   <div className="col-2">
                   <input
@@ -163,9 +166,14 @@ class App extends React.Component {
                           className="form-control"
                         />     
                   </div>
-                  <div  className="col-8"></div>
-
+                  <div  className="col-8">
+                  <div className="alert alert-info" role="alert">
+                     All the Saved Canvas will be create under this Issue if added.
+                  </div>
+                  </div>
+                  
                 </div>
+             
                               
 
                </div>      

@@ -1,34 +1,21 @@
 # DIY
 
 ## Goal
-
-## Tasks
-- [] Create design/UI for the below Feature
-- [] Implement Block Level Actions
-- [] Implement Canvas Actions
-- [] Admin Screen Changes
-- [] Getting Started Changes
-- [] Implment Static with Forge By generating New App
-- [] Create Production Ready
-    - [] Demo
-    - [] Video
-    - [] Devpost Submission
+- **Technical** :  Create a serverless game App that can use the maximum features of Forge
+- **Admin**: Build Creative Canvas Using productivity Data, User will get more tools to build something by themselves if they have more atlassian data.
 
 ## Features
-- Create Your Own World
-- Few Default blocks based on config
-- Block Actions
-    - Color change on click of block
-    - Block Remove from Canvas
-- Canvas Actions
-    - Zoom in / Zoom out/Center
-    - Add Blocks based on atlassian Data
-    - Info icon on canvas for game rules
-    - Share a Photo
-- Gift , Redium by comment on JIRA issue , random 5 Emoji , wordle word
+- Create Your Own World using Physics engine
+- Multiple Blocks/Tools in Canvas
+- Color-Change/Deletion/Static position of Blocks
+- Tools based on Atlassian Data
+- Share Canvas Image
+- Get Extra tools by Coupons(Help Collaboration + App Marketing)
+- Admin Configuration Page for JIRA and Confluence Data
+- Getting Started page for Admin
 
 ## Demo Video
-[Youtube]()
+[Youtube](https://youtu.be/usEQRGRaISQ)
 
 ## Forge Features 
 - Modules (JIRA, Confluence, Admin)
@@ -39,11 +26,11 @@
 - Rest API(JIRA/Confluence)
 
 ## App Details
-- App Id : 
+- App Id : 2f814a1d-b624-43ce-89a8-51d4c6677b01
 - App Site : https://devsunleashed.atlassian.net/
-- Distribution Link : 
+- Distribution Link : https://developer.atlassian.com/console/myapps/2f814a1d-b624-43ce-89a8-51d4c6677b01/distribution
 - Creds for Demo : Email : liner77937@octovie.com   Password : H@ck@123
-- bitbucket repo : 
+- bitbucket repo : https://bitbucket.org/sandeepscet/devsunleashed-diy
 
 
 ## Install
@@ -68,15 +55,15 @@ npx yarn install
 npx yarn serve
 ```
 
-## Pending
-- [] 
-
-## Limitation
-- [] 
-
-## Forge Feature Request
-- 
+## Future Scope
+- [] Add Canvas image to JIRA story to track
+- [] realtime add tools
+- [] Consider bitbucket Commit and PRs (Seems limitation from Forge Side)
+- [] Better UI
 
 ## Credit
 - [matter.js](https://github.com/liabru/matter-js)
-- [Get All Users](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-users/#api-rest-api-3-users-search-get)
+- [Typescript Boilerplare](https://github.com/VD39/typescript-webpack-boilerplate)
+- [Forge Platform](https://developer.atlassian.com/platform/forge/)
+- [Web Share API](https://web.dev/web-share/)
+- [Skeleton Picked up from my Another Project: Snake](https://bitbucket.org/sandeepscet/devsunleashed-hackathon)
