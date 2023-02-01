@@ -33,12 +33,6 @@
 - Permission (Scope, External CSS/JS, External Domains , Backend)
 - Rest API(JIRA/Confluence)
 
-## App Details
-- App Id : 2f814a1d-b624-43ce-89a8-51d4c6677b01
-- App Site : https://devsunleashed.atlassian.net/
-- Distribution Link : https://developer.atlassian.com/console/myapps/2f814a1d-b624-43ce-89a8-51d4c6677b01/distribution
-- Creds for Demo : Email : liner77937@octovie.com   Password : H@ck@123
-- bitbucket repo : https://bitbucket.org/sandeepscet/devsunleashed-diy
 
 
 ## Install
@@ -74,4 +68,3 @@ npx yarn serve
 - [Typescript Boilerplare](https://github.com/VD39/typescript-webpack-boilerplate)
 - [Forge Platform](https://developer.atlassian.com/platform/forge/)
 - [Web Share API](https://web.dev/web-share/)
-- [Skeleton Picked up from my Another Project: Snake](https://bitbucket.org/sandeepscet/devsunleashed-hackathon)
